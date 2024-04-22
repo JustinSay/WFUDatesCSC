@@ -1,0 +1,79 @@
+import java.util.Scanner;
+public class DatingAppSimulator {
+   public static void main(String[] args) {
+       Scanner scnr = new Scanner(System.in);
+       Person person1 = new Person("Chloe", 21, "Film", "Lesbian", "Female", "she/her");
+       Person person2 = new Person("Wendy", 20, "Art", "Bisexual", "Female", "she/her");
+       Person person3 = new Person("Blake", 21, "Cars", "Straight", "Male", "he/him");
+       Person person4 = new Person("Judson", 20, "Theatre", "Bisexual", "Male", "he/him");
+       Person person5 = new Person("Abby", 21, "Drinking", "Bisexual", "Female", "she/her");
+       Person[] people = {person1, person2, person3, person4, person5};
+       Person[] matches = new Person[5];
+       char response;
+
+
+       System.out.println("Welcome to the Dating App Simulator! You have 5 dating prospects today. " +
+               "Please swipe left or right after reading their bio (left being no, right being yes). " +
+               "Once you are finished swiping, you may set up dates with your matches!");
+
+
+       for(int i = 0; i < 5; i++) {
+           people[i].printBio();
+           if(people[i].swipe()){
+               Match potentialMatch = new Match();
+               potentialMatch.setName(people[i].getName());
+               potentialMatch.setHobby(people[i].getHobby());
+               if(potentialMatch.cpuMatch(scnr)){
+                   matches[i] = people[i];
+                   System.out.println("You matched!");
+               }
+           }
+       }
+
+
+       System.out.println("Congratulations! You have matched with:");
+       for(int i=0; i<5; i++){
+           if(matches[i]!=null) {
+               System.out.println(matches[i].getName());
+           }
+       }
+       System.out.println("It's now time to set up your date(s).");
+
+
+       for(int i=0; i<5; i++) {
+           if(matches[i] != null) {
+               Match match1 = new Match();
+               System.out.println("As a reminder, here is your match's bio:");
+               matches[i].printBio();
+               if(match1.chooseDate(scnr)) {
+                   response = 'Y';
+                   while (response != 'N') {
+                       System.out.println("What would you like to update? The day (D), time (T), or location (L)?");
+                       response = scnr.next().charAt(0);
+                       if (response == 'D') {
+                           System.out.println("What would you like the day of your date to be?");
+                           String day = scnr.nextLine();
+                           day = scnr.nextLine();
+                           match1.setDateDay(day);
+                       }
+                       else if (response == 'T') {
+                           System.out.println("When would you like the time of your date to be?");
+                           String time = scnr.next();
+                           match1.setDateTime(time);
+                       }
+                       else{
+                           System.out.println("Where would you like the location of your date to be?");
+                           String loc = scnr.nextLine();
+                           loc = scnr.nextLine();
+                           match1.setDateLocation(loc);
+                       }
+                       System.out.println("Your date has been notified of the update. Would you " +
+                               "like to update something else (Y/N)?");
+                       response = scnr.next().charAt(0);
+                   }
+               }
+               match1.finish();
+           }
+       }
+   }
+}
