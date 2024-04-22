@@ -1,0 +1,123 @@
+import java.util.Scanner;
+public class Person { //base class
+   //private fields for Person class
+   private String name;//the person's name
+   private int age;//the person's age
+   private String Hobby;//the person gets 1 hobby
+   private String Sexuality;//combination of sexuality and gender = matches and preferences
+   private String Gender;
+   private String Pronouns;
+
+
+   public Person() { //default constructor (constructor 1/3)
+       name = "Unknown";
+       age = -1;
+       Hobby = "Unknown";
+       Sexuality = "Unknown";
+       Pronouns = "They/Them";
+       Gender = "Unknown";
+   }
+
+
+   public Person(String name, int age, String Hobby, String Sexuality, String Gender, String Pronouns) { //constructor 2/3
+       this.name = name;
+       this.age = age;
+       this.Hobby = Hobby;
+       this.Sexuality = Sexuality;
+       this.Gender = Gender;
+       this.Pronouns = Pronouns;
+   }
+
+
+   public Person(String name, int Age, String Gender) { //Constructor 3/3
+       this.name = name;
+       this.age = age;
+       this.Gender = Gender;
+       Hobby = "Unknown";
+       Sexuality = "Unknown";
+       Pronouns = "They/Them";
+   }
+
+
+   //Below are the set/get methods for all field variables
+   public void setName(String userName) {
+       name = userName;
+   }
+
+
+   public String getName() {
+       return name;
+   }
+
+
+   public void setHobby(String myHobby) {
+       Hobby = myHobby;
+   }
+
+
+   public String getHobby() {
+       return Hobby;
+   }
+
+
+   public void setSexuality(String sexuality) {
+       this.Sexuality = sexuality;
+   }
+
+
+   public String getSexuality() {
+       return Sexuality;
+   }
+
+
+   public void setGender(String gender) {
+       this.Gender = gender;
+   }
+
+
+   public String getGender() {
+       return Gender;
+   }
+
+
+   public void setPronouns(String Pronouns) {
+       this.Pronouns = Pronouns;
+   }
+
+
+   public String getPronouns() {
+       return Pronouns;
+   }
+
+
+   public void exit(Scanner scnr) {
+       System.out.println("Are you sure you would like to exit? (Y/N)");
+       char response = scnr.next().charAt(0);
+       if (response == 'Y') {
+           System.out.println("Your program has been terminated. We are sad to see you go.");
+       }
+       else {
+           System.out.println("Great! Please continue swiping.");
+       }
+   }
+
+
+   public boolean swipe() { //store all matches in an array in the program file
+       boolean match;
+       Scanner scnr = new Scanner(System.in);
+       System.out.println("Right(match)or left(no match)?");
+       String swipe = scnr.next();
+       if(swipe.equalsIgnoreCase("right")) {
+           match = true;
+       }
+       else {
+           match = false;
+       }
+       return match;
+   }
+
+
+   public void printBio(){
+       System.out.println(name +"'s profile: \nName: " +name+"\nAge: " +age+ "\nGender and pronouns: " + Gender+", (" +Pronouns+") \nSexuality: " +Sexuality +"\nHobby: " +Hobby);
+   }
+}
